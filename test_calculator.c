@@ -108,6 +108,38 @@ void test_multiply_underflow(void)
     TEST_ASSERT_TRUE(result > 0);
 }
 
+void test_divide_positive_numbers(void)
+{
+    TEST_ASSERT_EQUAL(5, divide(15, 3));
+}
+
+void test_divide_positive_and_negative_numbers(void)
+{
+    TEST_ASSERT_EQUAL(-5, divide(20, -4));
+}
+
+void test_divide_negative_numbers(void)
+{
+    TEST_ASSERT_EQUAL(3, divide(-12, -4));
+}
+
+void test_divide_zero(void)
+{
+    TEST_ASSERT_EQUAL(0, divide(0, 5));
+}
+
+void test_divide_overflow(void)
+{
+    int result = divide(INT_MAX, 1 / 2);
+    TEST_ASSERT_TRUE(result < 0);
+}
+
+void test_divide_underflow(void)
+{
+    int result = divide(INT_MIN, 1 / 2);
+    TEST_ASSERT_TRUE(result > 0);
+}
+
 int main(void)
 {
     UNITY_BEGIN();
@@ -134,6 +166,14 @@ int main(void)
     RUN_TEST(test_multiply_zero);
     RUN_TEST(test_multiply_overflow);
     RUN_TEST(test_multiply_underflow);
+
+    printf("Running Dividing Tests: \n");
+    RUN_TEST(test_divide_positive_numbers);
+    RUN_TEST(test_divide_positive_and_negative_numbers);
+    RUN_TEST(test_divide_negative_numbers);
+    RUN_TEST(test_divide_zero);
+    RUN_TEST(test_divide_overflow);
+    RUN_TEST(test_divide_underflow);
 
     return UNITY_END();
 }
